@@ -1,3 +1,3 @@
 # cframes
 
-`package frames`, but in C.
+[`package frames`](https://github.com/knei-knurow/frames), but in C.
