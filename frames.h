@@ -6,7 +6,7 @@
 // Creates a new frame.
 // The frame starts with header and contains data.
 // Create also calculates the checksum using frames_calculate_checksum.
-// Data length must not overflow byte.
+// Data length must not overflow 250 (byte (=256) - 4 - 2).
 uint8_t* frames_create(uint8_t* header, uint8_t* data, uint8_t data_len);
 
 // Header returns frame's header. It is always 2 bytes.
