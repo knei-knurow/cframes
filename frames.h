@@ -1,3 +1,5 @@
+#pragma once
+
 // Library cframes provides useful functions to deal with data frames.
 
 #include <stdbool.h>
