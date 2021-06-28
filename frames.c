@@ -4,9 +4,12 @@
 
 // TODO: decide whether dynamic memory allocation is really needed
 
-uint8_t* frames_create(uint8_t* header, uint8_t* data, uint8_t data_len) {
-    uint8_t frame_len = 2 + 2 + data_len + 2;
-    uint8_t* frame = malloc(sizeof(uint8_t) * frame_len);
+void frames_create(uint8_t* header,
+                   uint8_t* data,
+                   uint8_t data_len,
+                   uint8_t* frame,
+                   uint8_t* frame_length) {
+    *frame_length = 2 + 2 + data_len + 2;
 
     frame[0] = header[0];
     frame[1] = header[1];
@@ -16,8 +19,8 @@ uint8_t* frames_create(uint8_t* header, uint8_t* data, uint8_t data_len) {
         frame[j] = data[i];
     }
 
-    frame[frame_len - 2] = '+';
-    frame[frame_len - 1] = frames_calculate_checksum(frame, frame_len);
+    frame[*frame_length - 2] = '+';
+    frame[*frame_length - 1] = frames_calculate_checksum(frame, *frame_length);
     return frame;
 }
 
