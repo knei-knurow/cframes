@@ -18,12 +18,11 @@ void frames_create(uint8_t* frame,
                    uint8_t* header,
                    uint8_t* data);
 
-// Header returns frame's header. It is always 2 bytes.
-uint8_t frames_header(uint8_t* frame);
+// Places frame's header into header parameter. It is always 2 bytes.
+void frames_header(uint8_t* frame, uint8_t* header);
 
-// Returns frame's data part from the first byte after a plus sign ("+") up
-// to the antepenultimate (last but one - 1) byte.
-uint8_t* frames_data(uint8_t frame, uint8_t data_len);
+// Paces frame's data into data parameter. It is always 2 bytes.
+void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data);
 
 // Returns the length of frame's data in bytes.
 uint8_t frames_len_data(uint8_t* frame);
@@ -43,6 +42,22 @@ uint8_t frames_len_data(uint8_t* frame);
 //
 // - its checksum must be correct
 bool frames_verify(uint8_t* frame, uint8_t frame_len);
+
+// Returns length of data part of a frame.
+// A valid frame always has:
+//
+// - 2 byte header
+//
+// - 1 length byte
+//
+// - 1 plus sign ("+")
+//
+// - 1 hash sign ("#")
+//
+// - 1 checksum byte
+//
+// That gives 6 non-data bytes.
+uint8_t frames_data_len(uint8_t frame_len);
 
 // Calculates the simple CRC checksum of frame.
 //

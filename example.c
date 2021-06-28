@@ -3,6 +3,7 @@
 
 #define FRAME_LEN 8
 
+// TODO: make example use all functions from frames.h
 int main(int argc, char const* argv[]) {
     printf("hello world\n");
 
