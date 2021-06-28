@@ -4,3 +4,8 @@
 
 # misc files
 .DS_Store
+
+# generated files
+*.o
+example
+

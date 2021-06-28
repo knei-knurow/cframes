@@ -6,10 +6,17 @@
 #include <stdint.h>
 
 // Creates a new frame.
-// The frame starts with header and contains data.
+//
+// You must allocate memory yourself.
+// The frame starts with 2-byte header and contains (frame_len - 6) bytes data.
 // Create also calculates the checksum using frames_calculate_checksum.
-// Data length must not overflow 250 (byte (=256) - 4 - 2).
-uint8_t* frames_create(uint8_t* header, uint8_t* data, uint8_t data_len);
+// Data length must not overflow 250 (256 - 6).
+//
+// Example frame: LD2+OK#C
+void frames_create(uint8_t* frame,
+                   uint8_t frame_len,
+                   uint8_t* header,
+                   uint8_t* data);
 
 // Header returns frame's header. It is always 2 bytes.
 uint8_t frames_header(uint8_t* frame);
@@ -27,7 +34,8 @@ uint8_t frames_len_data(uint8_t* frame);
 //
 // - start with 2 byte uppercase ASCII header
 //
-// - at 3rd position (2nd index): have a length byte that is equal to the length of data
+// - at 3rd position (2nd index): have a length byte that is equal to the length
+// of data
 //
 // - at 4th position (3rd index): have a plus sign ("+")
 //
