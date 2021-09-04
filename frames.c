@@ -35,11 +35,11 @@ uint8_t frames_len_data(uint8_t* frame) {
 }
 
 bool frames_verify(uint8_t* frame, uint8_t frame_len) {
-    if (frame[0] < 65 || frame[0] > 90) {
+    if (frame[0] < 'A' || frame[0] > 'Z') {
         return false;
     }
 
-    if (frame[1] < 65 || frame[1] > 90) {
+    if (frame[1] < 'A' || frame[1] > 'Z') {
         return false;
     }
 
