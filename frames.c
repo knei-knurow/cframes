@@ -13,9 +13,10 @@ void frames_create(uint8_t* frame,
     frame[1] = header[1];
     frame[2] = data_len;
     frame[3] = '+';
-    for (uint8_t i = 4; i < data_len; i++) {
-        frame[i] = data[i - 4];
-    }
+    //for (uint8_t i = 4; i < data_len; i++) {
+        //frame[i] = data[i - 4];
+    //}
+	memcpy(frame + 4, data, data_len);
 
     frame[frame_len - 2] = '#';
     frame[frame_len - 1] = frames_calculate_checksum(frame, frame_len);
