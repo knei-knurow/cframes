@@ -14,9 +14,9 @@
 //
 // Example frame: LD2+OK#C
 extern "C" void frames_create(uint8_t* frame,
-uint8_t frame_len,
-uint8_t* header,
-uint8_t* data);
+                              uint8_t frame_len,
+                              uint8_t* header,
+                              uint8_t* data);
 
 // Places frame's header into header parameter. It is always 2 bytes.
 extern "C" void frames_header(uint8_t* frame, uint8_t* header);
