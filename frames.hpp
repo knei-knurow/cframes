@@ -13,19 +13,19 @@
 // Data length must not overflow 250 (256 - 6).
 //
 // Example frame: LD2+OK#C
-extern void frames_create(uint8_t* frame,
-                   uint8_t frame_len,
-                   uint8_t* header,
-                   uint8_t* data);
+extern "C" void frames_create(uint8_t* frame,
+uint8_t frame_len,
+uint8_t* header,
+uint8_t* data);
 
 // Places frame's header into header parameter. It is always 2 bytes.
-extern void frames_header(uint8_t* frame, uint8_t* header);
+extern "C" void frames_header(uint8_t* frame, uint8_t* header);
 
 // Paces frame's data into data parameter. It is always 2 bytes.
-extern void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data);
+extern "C" void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data);
 
 // Returns the length of frame's data in bytes.
-extern uint8_t frames_len_data(uint8_t* frame);
+extern "C" uint8_t frames_len_data(uint8_t* frame);
 
 // Checks whether the frame is valid (i.e of correct format).
 //
@@ -41,7 +41,7 @@ extern uint8_t frames_len_data(uint8_t* frame);
 // - at penultimate position: have a hash sign ("#")
 //
 // - its checksum must be correct
-extern bool frames_verify(uint8_t* frame, uint8_t frame_len);
+extern "C" bool frames_verify(uint8_t* frame, uint8_t frame_len);
 
 // Returns length of data part of a frame.
 // A valid frame always has:
@@ -57,10 +57,10 @@ extern bool frames_verify(uint8_t* frame, uint8_t frame_len);
 // - 1 checksum byte
 //
 // That gives 6 non-data bytes.
-extern uint8_t frames_data_len(uint8_t frame_len);
+extern "C" uint8_t frames_data_len(uint8_t frame_len);
 
 // Calculates the simple CRC checksum of frame.
 //
 // It takes all frame's bytes into account, except the last byte, because
 // the last byte is the checksum itself.
-extern uint8_t frames_calculate_checksum(uint8_t* frame, uint8_t frame_len);
+extern "C" uint8_t frames_calculate_checksum(uint8_t* frame, uint8_t frame_len);
