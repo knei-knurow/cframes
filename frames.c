@@ -14,9 +14,6 @@ void frames_create(uint8_t* frame,
     frame[1] = header[1];
     frame[2] = data_len;
     frame[3] = '+';
-    // for (uint8_t i = 4; i < data_len; i++) {
-    // frame[i] = data[i - 4];
-    //}
     memcpy(frame + 4, data, data_len);
 
     frame[frame_len - 2] = '#';
@@ -29,7 +26,7 @@ void frames_header(uint8_t* frame, uint8_t* header) {
 }
 
 void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data) {
-    // TODO: implement
+    memcpy(data, frame, frame_len);
 }
 
 uint8_t frames_len_data(uint8_t* frame) {
