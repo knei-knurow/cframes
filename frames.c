@@ -15,7 +15,6 @@ void frames_create(uint8_t* frame,
     frame[2] = data_len;
     frame[3] = '+';
     memcpy(frame + 4, data, data_len);
-
     frame[frame_len - 2] = '#';
     frame[frame_len - 1] = frames_calculate_checksum(frame, frame_len);
 }
@@ -25,8 +24,10 @@ void frames_header(uint8_t* frame, uint8_t* header) {
     header[1] = frame[1];
 }
 
-void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data) {
-    memcpy(data, frame, frame_len);
+void frames_data(uint8_t* frame, uint8_t frame_len, uint8_t* data) {
+    for (uint8_t i = 4; i < frame_len; i++) {
+        data[i] = frame[i];
+    }
 }
 
 uint8_t frames_len_data(uint8_t* frame) {
