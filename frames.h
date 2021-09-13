@@ -21,7 +21,7 @@ extern void frames_create(uint8_t* frame,
 // Places frame's header into header parameter. It is always 2 bytes.
 extern void frames_header(uint8_t* frame, uint8_t* header);
 
-// Paces frame's data into data parameter. It is always 2 bytes.
+// Places frame's data into data parameter. It is always 2 bytes.
 extern void frames_data(uint8_t frame, uint8_t frame_len, uint8_t* data);
 
 // Returns the length of frame's data in bytes.
