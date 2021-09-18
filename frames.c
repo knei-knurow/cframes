@@ -24,8 +24,8 @@ void frames_header(uint8_t* frame, uint8_t* header) {
     header[1] = frame[1];
 }
 
-void frames_data(uint8_t* frame, uint8_t frame_len, uint8_t* data) {
-    memcpy(frame + 4, data, frame_len - 6);
+void frames_read_data(uint8_t* frame, uint8_t frame_len, uint8_t* data) {
+    memcpy(data, frame + 4, frame_len - 6);
 }
 
 uint8_t frames_len_data(uint8_t* frame) {
