@@ -33,11 +33,13 @@ uint8_t frames_len_data(uint8_t* frame) {
 }
 
 bool frames_verify(uint8_t* frame, uint8_t frame_len) {
-    if (frame[0] < 'A' || frame[0] > 'Z') {
+    if ((frame[0] < 'A' || frame[0] > 'Z') &&
+        (frame[0] < '0' || frame[0] > '9')) {
         return false;
     }
 
-    if (frame[1] < 'A' || frame[1] > 'Z') {
+    if ((frame[1] < 'A' || frame[1] > 'Z') &&
+        (frame[1] < '0' || frame[1] > '9')) {
         return false;
     }
 
