@@ -40,6 +40,10 @@ void frames_read_data(uint8_t* frame, uint8_t frame_len, uint8_t* data) {
     memcpy(data, frame + 5, frames_data_len(frame_len));
 }
 
+uint8_t frames_get_id(uint8_t* frame) {
+    return frame[3];
+}
+
 uint8_t frames_len_data(uint8_t* frame) {
     return frame[2];
 }

@@ -25,6 +25,9 @@ extern void frames_header(uint8_t* frame, uint8_t* header);
 // Places frame's data into data parameter.
 extern void frames_read_data(uint8_t* frame, uint8_t frame_len, uint8_t* data);
 
+// Get id of frame
+extern uint8_t frames_get_id(uint8_t* frame);
+
 // Returns the length of frame's data in bytes.
 extern uint8_t frames_len_data(uint8_t* frame);
 

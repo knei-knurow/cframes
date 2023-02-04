@@ -27,6 +27,9 @@ extern "C" void frames_read_data(uint8_t* frame,
                                  uint8_t frame_len,
                                  uint8_t* data);
 
+// Get id of frame
+extern "C" uint8_t frames_get_id(uint8_t* frame);
+
 // Returns the length of frame's data in bytes.
 extern "C" uint8_t frames_len_data(uint8_t* frame);
 
