@@ -3,18 +3,30 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Frame format:
+// header - 2 bytes
+// data length - 1 byte
+// frame id - 1 byte
+// '+' character - 1 byte
+// data
+// '#' character - 1 byte
+// checksum - 1 byte
+
 void frames_create(uint8_t* frame,
                    uint8_t frame_len,
                    uint8_t* header,
-                   uint8_t* data) {
-    // 6B because 2B header, 1B data length, 1B "+", 1B "#" and 1B checksum
+                   uint8_t* data,
+                   uint8_t frame_id) {
+    // 7B because 2B header, 1B data length, 1B frame id, 1B "+", 1B "#" and 1B
+    // checksum
     uint8_t data_len = frames_data_len(frame_len);
 
     frame[0] = header[0];
     frame[1] = header[1];
     frame[2] = data_len;
-    frame[3] = '+';
-    memcpy(frame + 4, data, data_len);
+    frame[3] = frame_id;
+    frame[4] = '+';
+    memcpy(frame + 5, data, data_len);
     frame[frame_len - 2] = '#';
     frame[frame_len - 1] = frames_calculate_checksum(frame, frame_len);
 }
@@ -25,7 +37,7 @@ void frames_header(uint8_t* frame, uint8_t* header) {
 }
 
 void frames_read_data(uint8_t* frame, uint8_t frame_len, uint8_t* data) {
-    memcpy(data, frame + 4, frame_len - 6);
+    memcpy(data, frame + 5, frames_data_len(frame_len));
 }
 
 uint8_t frames_len_data(uint8_t* frame) {
@@ -47,7 +59,7 @@ bool frames_verify(uint8_t* frame, uint8_t frame_len) {
         return false;
     }
 
-    if (frame[3] != '+') {
+    if (frame[4] != '+') {
         return false;
     }
 
@@ -60,7 +72,7 @@ bool frames_verify(uint8_t* frame, uint8_t frame_len) {
 }
 
 uint8_t frames_data_len(uint8_t frame_len) {
-    return frame_len - 6;
+    return frame_len - 7;
 }
 
 uint8_t frames_calculate_checksum(uint8_t* frame, uint8_t frame_len) {

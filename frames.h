@@ -8,20 +8,21 @@
 // Creates a new frame.
 //
 // You must allocate memory yourself.
-// The frame starts with 2-byte header and contains (frame_len - 6) bytes data.
+// The frame starts with 2-byte header and contains (frame_len - 7) bytes data.
 // Create also calculates the checksum using frames_calculate_checksum.
-// Data length must not overflow 250 (256 - 6).
+// Data length must not overflow 249 (256 - 7).
 //
-// Example frame: LD2+OK#C
+// Example frame: LD\x02\x00+OK#C
 extern void frames_create(uint8_t* frame,
                           uint8_t frame_len,
                           uint8_t* header,
-                          uint8_t* data);
+                          uint8_t* data,
+                          uint8_t frame_id);
 
 // Places frame's header into header parameter. It is always 2 bytes.
 extern void frames_header(uint8_t* frame, uint8_t* header);
 
-// Places frame's data into data parameter. It is always 2 bytes.
+// Places frame's data into data parameter.
 extern void frames_read_data(uint8_t* frame, uint8_t frame_len, uint8_t* data);
 
 // Returns the length of frame's data in bytes.
@@ -50,13 +51,15 @@ extern bool frames_verify(uint8_t* frame, uint8_t frame_len);
 //
 // - 1 length byte
 //
+// - 1 frame id byte
+//
 // - 1 plus sign ("+")
 //
 // - 1 hash sign ("#")
 //
 // - 1 checksum byte
 //
-// That gives 6 non-data bytes.
+// That gives 7 non-data bytes.
 extern uint8_t frames_data_len(uint8_t frame_len);
 
 // Calculates the simple CRC checksum of frame.
