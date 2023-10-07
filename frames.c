@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+uint8_t frame_number = 0;
+
 void frames_create(uint8_t* frame,
                    uint8_t frame_len,
                    uint8_t* header,
@@ -12,10 +14,10 @@ void frames_create(uint8_t* frame,
 
     frame[0] = header[0];
     frame[1] = header[1];
-    frame[2] = data_len;
-    frame[3] = '+';
-    memcpy(frame + 4, data, data_len);
-    frame[frame_len - 2] = '#';
+    frame[2] = '+';
+    frame[3] = frame_number++;
+    frame[4] = data_len;
+    memcpy(frame + 5, data, data_len);
     frame[frame_len - 1] = frames_calculate_checksum(frame, frame_len);
 }
 
