@@ -10,6 +10,7 @@ void frames_create(uint8_t* frame,
                    uint8_t* header,
                    uint8_t* data) {
     // 6B because 2B header, 1B data length, 1B "+", 1B "#" and 1B checksum
+    // temporary changes for direct compatibility with motor controller
     uint8_t data_len = frames_data_len(frame_len);
 
     frame[0] = header[0];
